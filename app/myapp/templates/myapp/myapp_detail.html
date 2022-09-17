@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ myapp_item.title }} :: {{ block.super }}
+{% endblock %}
+
+
+{%block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Категория: <a href="{{ myapp_item.category.get_absolute_url }}"> {{ myapp_item.category }} </a>
+        </div>
+        <div class="card-body">
+                {% if item.photo %}
+                <img src="{{ myapp_item.photo.url }}" alt="" width="350" class="float-left">
+                {% else %}
+                <img src="https://picsum.photos/id/1060/350/235/?blur=2" alt=""
+                     class="float-left">
+                {% endif %}
+                    <h5 class="card-title">{{ myapp_item.title }}</h5>
+                    <p class="card-text">{{ myapp_item.content|linebreaks }}</p>
+                    <a href="#" class="btn btn-primary">Raed more...</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ myapp_item.created_at|date:'Y-m-d H:i:s' }}
+        </div>
+    </div>
+{% endblock %}
